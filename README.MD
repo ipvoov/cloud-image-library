@@ -100,8 +100,8 @@ npm run dev
 ![图片管理](resource/public/resource/image/picture_manage.png)
 
 ### 空间分析
-![空间分析](resource/public/resource/image/space.png)
-git
+![空间分析](resource/public/resource/image/spece.png)
+
 ### 协同编辑
 ![协同编辑](resource/public/resource/image/edit.png)
 
