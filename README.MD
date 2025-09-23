@@ -94,16 +94,16 @@ npm run dev
 ## 📊 功能截图
 
 ### 首页
-![首页](docs/images/homepage.png)
+![首页](./docs/images/homepage.png)
 
 ### 图片管理
-![图片管理](docs/images/picture_manage.png)
+![图片管理](./docs/images/picture_manage.png)
 
 ### 空间分析
-![空间分析](docs/images/spece.png)
+![空间分析](./docs/images/spece.png)
 
 ### 协同编辑
-![协同编辑](docs/images/edit.png)
+![协同编辑](./docs/images/edit.png)
 
 
 ⭐ 如果这个项目对您有帮助，请给我们一个星标！
