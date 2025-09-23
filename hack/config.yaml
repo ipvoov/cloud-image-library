@@ -4,7 +4,7 @@
 gfcli:
   gen:
     dao:
-      - link: "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+      - link: "mysql:root:root@tcp(db.offves.com:3306)/cloud_picture"
         descriptionTag: true
 
   docker:

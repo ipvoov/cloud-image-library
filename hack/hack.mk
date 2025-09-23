@@ -20,7 +20,7 @@ ctrl: cli.install
 dao: cli.install
 	@gf gen dao
 
-# Parse current project go files and generate enums go file.
+# Parse current project go files and generate enums go bucket.
 .PHONY: enums
 enums: cli.install
 	@gf gen enums

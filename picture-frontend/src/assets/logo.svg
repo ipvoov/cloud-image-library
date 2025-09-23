@@ -1,0 +1,27 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- 云朵背景 -->
+  <path d="M16 32c0-8 6.5-14.5 14.5-14.5 4.5 0 8.5 2 11.5 5.5 1.5-1 3.5-1.5 5.5-1.5 5.5 0 10 4.5 10 10 0 1-0.2 2-0.5 3 2.8 1.5 4.5 4.5 4.5 8 0 5-4 9-9 9H20c-6 0-11-5-11-11 0-5.5 4-10 7-10z" fill="#4A90E2" opacity="0.8"/>
+  
+  <!-- AI芯片图标 -->
+  <rect x="24" y="28" width="16" height="12" rx="2" fill="#2ECC71" stroke="#27AE60" stroke-width="1"/>
+  
+  <!-- 芯片内部电路 -->
+  <line x1="26" y1="30" x2="30" y2="30" stroke="#27AE60" stroke-width="1"/>
+  <line x1="26" y1="32" x2="32" y2="32" stroke="#27AE60" stroke-width="1"/>
+  <line x1="26" y1="34" x2="30" y2="34" stroke="#27AE60" stroke-width="1"/>
+  <line x1="34" y1="30" x2="38" y2="30" stroke="#27AE60" stroke-width="1"/>
+  <line x1="34" y1="34" x2="38" y2="34" stroke="#27AE60" stroke-width="1"/>
+  
+  <!-- 连接线 -->
+  <line x1="20" y1="34" x2="24" y2="34" stroke="#34495E" stroke-width="2"/>
+  <line x1="40" y1="34" x2="44" y2="34" stroke="#34495E" stroke-width="2"/>
+  <line x1="32" y1="24" x2="32" y2="28" stroke="#34495E" stroke-width="2"/>
+  <line x1="32" y1="40" x2="32" y2="44" stroke="#34495E" stroke-width="2"/>
+  
+  <!-- 图片框架 -->
+  <rect x="20" y="20" width="8" height="6" rx="1" fill="#E74C3C" opacity="0.7"/>
+  <rect x="36" y="20" width="8" height="6" rx="1" fill="#F39C12" opacity="0.7"/>
+  <rect x="20" y="44" width="8" height="6" rx="1" fill="#9B59B6" opacity="0.7"/>
+  <rect x="36" y="44" width="8" height="6" rx="1" fill="#1ABC9C" opacity="0.7"/>
+</svg>
+

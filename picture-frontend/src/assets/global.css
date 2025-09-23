@@ -1,0 +1,324 @@
+/* 全局CSS样式 - 智能云图库 */
+
+/* 全局字体和基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* 全局动画 */
+@keyframes slideInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/* 页面元素动画类 */
+.animate-slide-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* 全局滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(240, 242, 247, 0.8);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.6) 0%, rgba(118, 75, 162, 0.6) 100%);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+}
+
+/* 全局Ant Design组件样式优化 */
+.ant-btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ant-btn:hover {
+  transform: translateY(-1px);
+}
+
+.ant-input, .ant-select-selector {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.ant-input:focus, .ant-select-focused .ant-select-selector {
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+  border-color: #667eea;
+}
+
+.ant-card {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.ant-modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.ant-modal-header {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.ant-tabs-tab {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.ant-tabs-tab:hover {
+  color: #667eea;
+}
+
+.ant-tabs-tab-active {
+  color: #667eea !important;
+}
+
+.ant-tabs-ink-bar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  height: 3px !important;
+  border-radius: 2px;
+}
+
+/* 加载状态美化 */
+.ant-spin-dot-item {
+  background-color: #667eea;
+}
+
+.ant-spin-spinning {
+  backdrop-filter: blur(4px);
+}
+
+/* 通知和消息样式 */
+.ant-message {
+  top: 80px;
+}
+
+.ant-message-notice-content {
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.ant-notification-notice {
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 工具提示美化 */
+.ant-tooltip-inner {
+  background: rgba(102, 126, 234, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.ant-tooltip-arrow-content {
+  background: rgba(102, 126, 234, 0.9);
+}
+
+/* 下拉菜单美化 */
+.ant-dropdown-menu {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.ant-dropdown-menu-item {
+  border-radius: 8px;
+  margin: 4px 8px;
+  transition: all 0.3s ease;
+}
+
+.ant-dropdown-menu-item:hover {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+/* 表格美化 */
+.ant-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ant-table-thead > tr > th {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+  font-weight: 600;
+  color: #667eea;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: rgba(102, 126, 234, 0.02);
+}
+
+/* 表单美化 */
+.ant-form-item-label > label {
+  font-weight: 500;
+  color: #333;
+}
+
+.ant-form-item-required::before {
+  color: #667eea !important;
+}
+
+/* 步骤条美化 */
+.ant-steps-item-process .ant-steps-item-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+}
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  background: linear-gradient(135deg, #52c41a 0%, #389e0d 100%);
+  border-color: #52c41a;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  
+  .ant-card {
+    margin: 8px;
+  }
+  
+  .ant-modal {
+    margin: 16px;
+  }
+  
+  .ant-modal-content {
+    border-radius: 12px;
+  }
+}
+
+/* 深色模式支持（预留） */
+@media (prefers-color-scheme: dark) {
+  /* 这里可以添加深色模式的样式 */
+}
+
+/* 减少动画（为有需要的用户） */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+  .ant-btn, .ant-input, .ant-card {
+    border-width: 2px;
+  }
+}
+
+/* 打印样式 */
+@media print {
+  body {
+    background: white !important;
+  }
+  
+  .no-print,
+  .ant-affix,
+  .ant-drawer,
+  .ant-modal-mask,
+  .ant-modal-wrap {
+    display: none !important;
+  }
+}
