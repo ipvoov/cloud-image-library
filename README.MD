@@ -94,7 +94,7 @@ npm run dev
 ## 📊 功能截图
 
 ### 首页
-![首页](./docs/images/homepage.png)
+<img src="./docs/images/homepage.png" alt="首页" width="300" height="200">
 
 ### 图片管理
 ![图片管理](./docs/images/picture_manage.png)
