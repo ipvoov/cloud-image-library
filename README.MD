@@ -97,13 +97,13 @@ npm run dev
 <img src="./resource/public/resource/image/homepage.png" alt="主页图" width="50%">
 
 ### 图片管理
-![图片管理](./docs/images/picture_manage.png)
+<img src="./resource/public/resource/image/picture_manage.png" alt="主页图" width="50%">
 
 ### 空间分析
-![空间分析](./docs/images/spece.png)
+<img src="./resource/public/resource/image/spece.png" alt="主页图" width="50%">
 
 ### 协同编辑
-![协同编辑](./docs/images/edit.png)
+<img src="./resource/public/resource/image/edit.png" alt="主页图" width="50%">
 
 
 ⭐ 如果这个项目对您有帮助，请给我们一个星标！
