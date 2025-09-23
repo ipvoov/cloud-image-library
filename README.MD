@@ -11,6 +11,17 @@
 - **🌐 现代化UI**: 基于 Ant Design Vue 的美观界面
 - **⚡ 高性能**: Go 后端 + Vue3 前端，响应迅速
 
+## 🛠️ 技术栈
+
+### 后端技术
+- **Go 1.23+**: 主要开发语言
+- **GoFrame v2**: Web框架和ORM
+- **MySQL 8.0+**: 主数据库
+- **Redis**: 缓存和会话存储
+- **WebSocket**: 实时通信
+- **腾讯云COS**: 对象存储服务
+- **火山引擎**: AI服务集成
+
 ## 🚀 核心功能
 
 ### 图片管理
@@ -38,56 +49,6 @@
 - 📢 **状态同步**: 实时同步编辑状态和操作
 - 💬 **消息通知**: 编辑状态变化通知
 
-## 🛠️ 技术栈
-
-### 后端技术
-- **Go 1.23+**: 主要开发语言
-- **GoFrame v2**: Web框架和ORM
-- **MySQL 8.0+**: 主数据库
-- **Redis**: 缓存和会话存储
-- **WebSocket**: 实时通信
-- **腾讯云COS**: 对象存储服务
-- **火山引擎**: AI服务集成
-
-### 前端技术
-- **Vue 3.5+**: 前端框架
-- **TypeScript**: 类型安全
-- **Ant Design Vue**: UI组件库
-- **Pinia**: 状态管理
-- **Vue Router**: 路由管理
-- **Axios**: HTTP客户端
-- **ECharts**: 数据可视化
-- **Vue Cropper**: 图片裁剪
-
-## 📁 项目结构
-
-```
-cloud-picture-library/
-├── api/                    # API接口定义
-│   └── user/v1/           # 用户相关API
-├── internal/              # 内部代码
-│   ├── cmd/               # 命令行入口
-│   ├── controller/        # 控制器层
-│   ├── dao/               # 数据访问层
-│   ├── logic/             # 业务逻辑层
-│   ├── middleware/         # 中间件
-│   ├── model/             # 数据模型
-│   └── service/           # 服务层
-├── manifest/              # 部署配置
-│   ├── config/            # 配置文件
-│   ├── deploy/            # 部署脚本
-│   └── docker/            # Docker配置
-├── picture-frontend/      # 前端项目
-│   ├── src/
-│   │   ├── api/           # API接口
-│   │   ├── components/    # 组件
-│   │   ├── pages/         # 页面
-│   │   ├── stores/        # 状态管理
-│   │   └── utils/         # 工具函数
-│   └── package.json
-├── docs/                  # 文档
-├── cloud_picture.sql      # 数据库脚本
-└── main.go               # 程序入口
 ```
 
 ## 🚀 快速开始
@@ -169,127 +130,21 @@ npm run dev
 - 前端地址: http://localhost:5173
 - 后端API: http://localhost:8123
 - API文档: http://localhost:8123/swagger
-
-## 📖 API文档
-
-### 用户相关接口
-
-| 接口 | 方法 | 描述 |
-|------|------|------|
-| `/api/user/register` | POST | 用户注册 |
-| `/api/user/login` | POST | 用户登录 |
-| `/api/user/logout` | POST | 用户登出 |
-| `/api/user/get/login` | GET | 获取当前登录用户信息 |
-
-### 图片相关接口
-
-| 接口 | 方法 | 描述 |
-|------|------|------|
-| `/api/picture/add` | POST | 上传图片 |
-| `/api/picture/list/page/vo` | POST | 分页查询图片 |
-| `/api/picture/edit` | POST | 编辑图片信息 |
-| `/api/picture/delete` | POST | 删除图片 |
-
-### 空间相关接口
-
-| 接口 | 方法 | 描述 |
-|------|------|------|
-| `/api/space/add` | POST | 创建空间 |
-| `/api/space/list/page/vo` | POST | 分页查询空间 |
-| `/api/space/analyze` | GET | 空间分析 |
-
-## 🔧 开发指南
-
-### 添加新功能
-
-1. **定义API接口** (`api/user/v1/`)
-2. **实现控制器** (`internal/controller/`)
-3. **编写业务逻辑** (`internal/logic/`)
-4. **更新数据模型** (`internal/model/`)
-5. **前端页面开发** (`picture-frontend/src/`)
-
-### 数据库迁移
-
-```bash
-# 生成新的迁移文件
-go run main.go migrate create add_new_table
-
-# 执行迁移
-go run main.go migrate up
-```
-
-### 代码规范
-
-- 后端遵循 Go 官方代码规范
-- 前端使用 ESLint + Prettier
-- 提交信息遵循 Conventional Commits
-
-## 🐳 Docker部署
-
-### 构建镜像
-
-```bash
-# 构建后端镜像
-docker build -t cloud-picture-backend -f manifest/docker/Dockerfile .
-
-# 构建前端镜像
-cd picture-frontend
-docker build -t cloud-picture-frontend .
-```
-
-### 使用Docker Compose
-
-```bash
-# 启动所有服务
-docker-compose up -d
-
-# 查看服务状态
-docker-compose ps
 ```
 
 ## 📊 功能截图
 
 ### 首页
-![首页](docs/screenshots/homepage.png)
+![首页](resource/public/resource/image/homepage.png)
 
 ### 图片管理
-![图片管理](docs/screenshots/picture-management.png)
+![图片管理](resource/public/resource/image/picture_manage.png)
 
 ### 空间分析
-![空间分析](docs/screenshots/space-analysis.png)
-
+![空间分析](resource/public/resource/image/space.png)
+git
 ### 协同编辑
-![协同编辑](docs/screenshots/collaborative-editing.png)
+![协同编辑](resource/public/resource/image/edit.png)
 
-## 🤝 贡献指南
-
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
-
-## 📄 许可证
-
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
-
-## 👥 开发团队
-
-- **主要开发者**: [您的名字](https://github.com/your-username)
-- **项目维护者**: [维护者名字](https://github.com/maintainer)
-
-## 🙏 致谢
-
-- [GoFrame](https://goframe.org/) - 优秀的Go Web框架
-- [Ant Design Vue](https://antdv.com/) - 企业级UI组件库
-- [Vue.js](https://vuejs.org/) - 渐进式JavaScript框架
-
-## 📞 联系我们
-
-- 项目地址: https://github.com/your-username/cloud-picture-library
-- 问题反馈: https://github.com/your-username/cloud-picture-library/issues
-- 邮箱: your-email@example.com
-
----
 
 ⭐ 如果这个项目对您有帮助，请给我们一个星标！

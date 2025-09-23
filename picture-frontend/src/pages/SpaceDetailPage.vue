@@ -1,5 +1,20 @@
 <template>
   <div id="spaceDetailPage">
+    <!-- 空间选择器 -->
+    <div style="margin-bottom: 16px">
+      <a-select
+        v-model:value="currentSpaceId"
+        placeholder="选择空间"
+        style="width: 200px"
+        @change="onSpaceChange"
+        :loading="spacesLoading"
+      >
+        <a-select-option v-for="spaceItem in spaceList" :key="spaceItem.id" :value="spaceItem.id">
+          {{ spaceItem.spaceName }}
+        </a-select-option>
+      </a-select>
+    </div>
+    
     <!-- 空间信息 -->
     <a-flex justify="space-between">
       <h2>{{ space.spaceName }}（{{ SPACE_TYPE_MAP[space.spaceType] }}）</h2>
@@ -80,8 +95,9 @@
 
 <script setup lang="ts">
 import { computed, h, onMounted, ref, watch } from 'vue'
-import { getSpaceVoByIdUsingGet } from '@/api/spaceController.ts'
+import { getSpaceVoByIdUsingGet, listSpaceVoByPageUsingPost } from '@/api/spaceController.ts'
 import { message } from 'ant-design-vue'
+import { useRouter } from 'vue-router'
 import {
   listPictureVoByPageUsingPost,
   searchPictureByColorUsingPost,
@@ -100,7 +116,39 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const router = useRouter()
 const space = ref<API.SpaceVO>({})
+
+// 空间列表相关
+const spaceList = ref<API.SpaceVO[]>([])
+const spacesLoading = ref(false)
+const currentSpaceId = ref<string | number>()
+
+// 获取用户所有可访问的空间列表
+const fetchSpaceList = async () => {
+  spacesLoading.value = true
+  try {
+    const res = await listSpaceVoByPageUsingPost({
+      current: 1,
+      pageSize: 100, // 获取较多空间
+    })
+    if (res.data.code === 0 && res.data.data) {
+      spaceList.value = res.data.data.records ?? []
+    } else {
+      message.error('获取空间列表失败，' + res.data.message)
+    }
+  } catch (e: any) {
+    message.error('获取空间列表失败：' + e.message)
+  }
+  spacesLoading.value = false
+}
+
+// 空间切换处理
+const onSpaceChange = (spaceId: string | number) => {
+  if (spaceId !== props.id) {
+    router.push(`/space/${spaceId}`)
+  }
+}
 
 // 通用权限检查函数
 function createPermissionChecker(permission: string) {
@@ -133,6 +181,9 @@ const fetchSpaceDetail = async () => {
 
 onMounted(() => {
   fetchSpaceDetail()
+  fetchSpaceList()
+  // 设置当前选中的空间ID
+  currentSpaceId.value = props.id
 })
 
 // --------- 获取图片列表 --------
@@ -235,6 +286,8 @@ watch(
   (newSpaceId) => {
     fetchSpaceDetail()
     fetchData()
+    // 更新当前选中的空间ID
+    currentSpaceId.value = newSpaceId
   },
 )
 </script>

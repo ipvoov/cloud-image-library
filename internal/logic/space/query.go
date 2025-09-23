@@ -142,9 +142,28 @@ func (s *sSpace) ListVOByPage(ctx context.Context, req *v1.SpaceQueryReq) (res *
 		return nil, gerror.New("用户未登录")
 	}
 
-	// 构建查询条件 - 用户只能查看自己的空间
+	// 获取用户有权限访问的空间ID列表
+	accessibleSpaceIds, err := s.getUserAccessibleSpaceIds(ctx, user.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(accessibleSpaceIds) == 0 {
+		// 用户没有任何可访问的空间
+		return &v1.SpaceQueryVORes{
+			Records: []v1.SpaceVO{},
+			PageInfo: &v1.PageInfo{
+				Current: req.Current,
+				Size:    req.PageSize,
+				Total:   0,
+				Pages:   0,
+			},
+		}, nil
+	}
+
+	// 构建查询条件 - 用户只能查看自己有权限的空间
 	query := dao.Space.Ctx(ctx).Where(dao.Space.Columns().IsDelete, 0).
-		Where(dao.Space.Columns().UserId, user.Id)
+		WhereIn(dao.Space.Columns().Id, accessibleSpaceIds)
 
 	if req.SpaceId != "" && req.SpaceId != "[object Object]" {
 		query = query.Where(dao.Space.Columns().Id, gconv.Int64(req.SpaceId))
@@ -251,9 +270,17 @@ func (s *sSpace) entityToSpaceVO(ctx context.Context, space *entity.Space, userI
 	// 获取用户权限列表
 	permissions := s.getUserPermissions(ctx, space, userId)
 
+	// 确定显示的空间名称（如果是私有空间，显示为"私有空间"，团队空间显示原名）
+	displayName := space.SpaceName
+	if space.SpaceType == consts.SpaceTypePrivate {
+		displayName = space.SpaceName + " (私有空间)"
+	} else if space.SpaceType == consts.SpaceTypeTeam {
+		displayName = space.SpaceName + " (团队空间)"
+	}
+
 	return &v1.SpaceVO{
 		Id:             space.Id,
-		SpaceName:      space.SpaceName,
+		SpaceName:      displayName,
 		SpaceLevel:     space.SpaceLevel,
 		MaxSize:        space.MaxSize,
 		MaxCount:       space.MaxCount,
@@ -266,6 +293,69 @@ func (s *sSpace) entityToSpaceVO(ctx context.Context, space *entity.Space, userI
 		SpaceType:      space.SpaceType,
 		PermissionList: permissions,
 	}
+}
+
+// getUserAccessibleSpaceIds 获取用户有权限访问的空间ID列表
+func (s *sSpace) getUserAccessibleSpaceIds(ctx context.Context, userId int64) ([]int64, error) {
+	var spaceIds []int64
+
+	// 1. 查询用户创建的所有空间（私有空间）
+	var ownedSpaces []entity.Space
+	err := dao.Space.Ctx(ctx).Fields(dao.Space.Columns().Id).
+		Where(dao.Space.Columns().UserId, userId).
+		Where(dao.Space.Columns().IsDelete, 0).
+		Scan(&ownedSpaces)
+	if err != nil {
+		return nil, gerror.New("查询用户空间失败")
+	}
+
+	// 添加用户创建的空间ID
+	for _, space := range ownedSpaces {
+		spaceIds = append(spaceIds, space.Id)
+	}
+
+	// 2. 查询用户被邀请加入的团队空间
+	var spaceUsers []entity.SpaceUser
+	err = dao.SpaceUser.Ctx(ctx).Fields(dao.SpaceUser.Columns().SpaceId).
+		Where(dao.SpaceUser.Columns().UserId, userId).
+		Scan(&spaceUsers)
+	if err != nil {
+		return nil, gerror.New("查询用户空间权限失败")
+	}
+
+	// 添加用户被邀请的空间ID（需要确保这些空间存在且未删除）
+	if len(spaceUsers) > 0 {
+		var invitedSpaceIds []int64
+		for _, spaceUser := range spaceUsers {
+			invitedSpaceIds = append(invitedSpaceIds, spaceUser.SpaceId)
+		}
+
+		var invitedSpaces []entity.Space
+		err = dao.Space.Ctx(ctx).Fields(dao.Space.Columns().Id).
+			WhereIn(dao.Space.Columns().Id, invitedSpaceIds).
+			Where(dao.Space.Columns().IsDelete, 0).
+			Scan(&invitedSpaces)
+		if err != nil {
+			return nil, gerror.New("查询邀请空间失败")
+		}
+
+		// 添加有效的邀请空间ID
+		for _, space := range invitedSpaces {
+			// 避免重复添加（用户既是创建者又是成员的情况）
+			found := false
+			for _, existingId := range spaceIds {
+				if existingId == space.Id {
+					found = true
+					break
+				}
+			}
+			if !found {
+				spaceIds = append(spaceIds, space.Id)
+			}
+		}
+	}
+
+	return spaceIds, nil
 }
 
 // getUserPermissions 获取用户在空间中的权限
