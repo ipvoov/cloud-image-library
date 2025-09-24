@@ -92,6 +92,12 @@ npm run dev
 ### 空间分析
 <img src="./resource/public/resource/image/spece.png" alt="主页图" width="50%">
 
+### 以图生图
+https://github.com/user-attachments/assets/a4bbb53b-6787-4f09-9255-ca18844cafa8
+
+### 批量爬取图片
+https://github.com/user-attachments/assets/b008e730-bff9-49b5-aa0b-4fb772eee90d
+
 ### 协同编辑
 <img src="./resource/public/resource/image/edit.png" alt="主页图" width="50%">
 
