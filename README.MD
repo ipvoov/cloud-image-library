@@ -99,7 +99,7 @@ https://github.com/user-attachments/assets/a4bbb53b-6787-4f09-9255-ca18844cafa8
 https://github.com/user-attachments/assets/b008e730-bff9-49b5-aa0b-4fb772eee90d
 
 ### 协同编辑
-<img src="./resource/public/resource/image/edit_github.gif" alt="主页图" width="50%">
+<img src="./resource/public/resource/image/edit_github.gif" alt="主页图" width="100%">
 
 
 ⭐ 如果这个项目对您有帮助，请给们一个星标！
