@@ -14,6 +14,10 @@ import (
 
 type (
 	IPicture interface {
+		// CreateAIEditingTask 创建AI编辑任务
+		CreateAIEditingTask(ctx context.Context, req *v1.CreatePictureAIEditingTaskReq) (res *v1.CreatePictureAIEditingTaskRes, err error)
+		// GetAIEditingTask 获取AI编辑任务
+		GetAIEditingTask(ctx context.Context, req *v1.GetPictureAIEditingTaskReq) (res *v1.GetPictureAIEditingTaskRes, err error)
 		// UploadByBatch 批量上传图片
 		UploadByBatch(ctx context.Context, req *v1.PictureUploadByBatchReq) (res *v1.PictureUploadByBatchRes, err error)
 		// EditByBatch 批量编辑图片
@@ -24,6 +28,8 @@ type (
 		Delete(ctx context.Context, req *v1.DeleteReq) (res *v1.DeleteRes, err error)
 		// Update 更新图片
 		Update(ctx context.Context, req *v1.PictureUpdateReq) (res *v1.PictureUpdateRes, err error)
+		// CreateOutPainting 创建扩图
+		CreateOutPainting(ctx context.Context, req *v1.CreatePictureOutPaintingReq) (res *v1.CreatePictureOutPaintingRes, err error)
 		// TagCategory 获取图片标签分类
 		TagCategory(ctx context.Context, req *v1.PictureTagCategoryReq) (res *v1.PictureTagCategoryRes, err error)
 		// Get 获取图片详情
@@ -44,12 +50,6 @@ type (
 		Upload(ctx context.Context, req *v1.PictureUploadReq, file *ghttp.UploadFile) (res *v1.PictureUploadRes, err error)
 		// UploadByUrl 通过URL上传图片
 		UploadByUrl(ctx context.Context, req *v1.PictureUploadByUrlReq) (res *v1.PictureUploadByUrlRes, err error)
-		// CreateAIEditingTask 创建AI编辑任务
-		CreateAIEditingTask(ctx context.Context, req *v1.CreatePictureAIEditingTaskReq) (res *v1.CreatePictureAIEditingTaskRes, err error)
-		// GetAIEditingTask 获取AI编辑任务
-		GetAIEditingTask(ctx context.Context, req *v1.GetPictureAIEditingTaskReq) (res *v1.GetPictureAIEditingTaskRes, err error)
-		// CreateOutPainting 创建扩图
-		CreateOutPainting(ctx context.Context, req *v1.CreatePictureOutPaintingReq) (res *v1.CreatePictureOutPaintingRes, err error)
 	}
 )
 

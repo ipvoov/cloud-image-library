@@ -6,8 +6,9 @@ server:
   openapiPath: "/api.json"
   swaggerPath: "/swagger"
 
-secretId: "xxxx"
-secretKey: "xxxx"
+#这里填 对象存储 COS的 secretId,和 key,我的是用的腾讯云的 COS
+secretId: "xxx"
+secretKey: "xxx"
 
 aiKey: "xxxx"
 

@@ -60,10 +60,6 @@ var (
 						group.POST("/url", controller.Picture.UploadByUrl)
 						group.POST("/batch", controller.Picture.UploadByBatch)
 					})
-					// 下载
-					// group.Group("/download", func(group *ghttp.RouterGroup) {
-					// 	group.POST("/", controller.File.Download)
-					// })
 					// 获取图片标签分类
 					group.GET("/tag_category", controller.Picture.TagCategory)
 					// 图片CRUD操作
@@ -152,10 +148,9 @@ var (
 
 				// WebSocket 相关路由
 				group.Group("/ws", func(group *ghttp.RouterGroup) {
+					group.Middleware(middleware.Auth)
 					// 图片协同编辑 WebSocket
-					group.GET("/picture/edit", controller.WebSocket.PictureEdit)
-					// WebSocket 测试端点
-					group.GET("/test", controller.WebSocket.Test)
+					group.GET("/picture/edit", controller.WebSocket.WebSocketPictureEdit)
 				})
 			})
 			s.Run()

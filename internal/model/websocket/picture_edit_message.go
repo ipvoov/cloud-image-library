@@ -1,4 +1,4 @@
-package websocket
+package wsmodel
 
 import "cloud/internal/model/entity"
 

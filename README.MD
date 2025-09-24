@@ -2,15 +2,6 @@
 
 一个基于 Go + Vue3 的现代化图片管理系统，支持图片上传、管理、协同编辑和空间管理等功能。
 
-## 🌟 项目特色
-
-- **🎨 智能图片管理**: 支持多种图片格式，自动提取图片信息和颜色特征
-- **👥 团队协作**: 支持团队空间和实时协同编辑
-- **🔐 权限管理**: 细粒度的用户权限控制
-- **📊 数据分析**: 丰富的空间使用分析和统计功能
-- **🌐 现代化UI**: 基于 Ant Design Vue 的美观界面
-- **⚡ 高性能**: Go 后端 + Vue3 前端，响应迅速
-
 ## 🛠️ 技术栈
 
 ### 后端技术
@@ -101,8 +92,14 @@ npm run dev
 ### 空间分析
 <img src="./resource/public/resource/image/spece.png" alt="主页图" width="50%">
 
+### 以图生图
+https://github.com/user-attachments/assets/a4bbb53b-6787-4f09-9255-ca18844cafa8
+
+### 批量爬取图片
+https://github.com/user-attachments/assets/b008e730-bff9-49b5-aa0b-4fb772eee90d
+
 ### 协同编辑
-<img src="./resource/public/resource/image/edit.png" alt="主页图" width="50%">
+<img src="./resource/public/resource/image/edit_git.gif" alt="主页图" width="50%">
 
 
-⭐ 如果这个项目对您有帮助，请给我们一个星标！
+⭐ 如果这个项目对您有帮助，请给们一个星标！

@@ -11,4 +11,5 @@ import (
 	_ "cloud/internal/logic/space_analyze"
 	_ "cloud/internal/logic/space_user"
 	_ "cloud/internal/logic/user"
+	_ "cloud/internal/logic/websocket"
 )

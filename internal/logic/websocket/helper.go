@@ -1,12 +1,45 @@
-package space
+package websocket
 
 import (
 	"cloud/internal/dao"
 	"cloud/internal/model/entity"
 	"context"
+	"net/http"
 
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gorilla/websocket"
 )
+
+var wsUpGrader = websocket.Upgrader{
+	// 开发环境下允许任何来源
+	// 生产环境下需要实现适当的来源检查以确保安全
+	CheckOrigin: func(r *http.Request) bool {
+		return true
+	},
+	// 升级失败时的错误处理器
+	Error: func(w http.ResponseWriter, r *http.Request, status int, reason error) {
+		// 在这里实现错误处理逻辑
+		g.Log().Error(r.Context(), reason)
+	},
+}
+
+// GetPictureById 根据ID获取图片
+func GetPictureById(ctx context.Context, pictureID int64) (*entity.Picture, error) {
+	var picture *entity.Picture
+	err := dao.Picture.Ctx(ctx).Where(dao.Picture.Columns().Id, pictureID).
+		Where(dao.Picture.Columns().IsDelete, 0).Scan(&picture)
+
+	if err != nil {
+		return nil, gerror.New("查询图片失败")
+	}
+
+	if picture == nil {
+		return nil, gerror.New("图片不存在")
+	}
+
+	return picture, nil
+}
 
 // GetSpaceById 根据ID获取空间 - WebSocket专用
 func GetSpaceById(ctx context.Context, spaceID int64) (*entity.Space, error) {
@@ -25,7 +58,7 @@ func GetSpaceById(ctx context.Context, spaceID int64) (*entity.Space, error) {
 	return space, nil
 }
 
-// CheckEditPermission 检查用户是否有编辑权限 - WebSocket专用
+// CheckEditPermission 检查用户是否有编辑权限
 func CheckEditPermission(ctx context.Context, spaceID int64, userID int64) bool {
 	// 检查空间是否存在
 	var space *entity.Space

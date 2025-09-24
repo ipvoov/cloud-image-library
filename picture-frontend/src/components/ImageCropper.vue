@@ -211,7 +211,11 @@ const initWebsocket = () => {
 
   websocket.on(PICTURE_EDIT_MESSAGE_TYPE_ENUM.ERROR, (msg) => {
     console.log('收到错误通知：', msg)
-    message.info(msg.message)
+    message.error(msg.message)
+    // 如果进入编辑失败，清除编辑状态
+    if (editingUser.value?.id === loginUser.id) {
+      editingUser.value = undefined
+    }
   })
 
   websocket.on(PICTURE_EDIT_MESSAGE_TYPE_ENUM.ENTER_EDIT, (msg) => {
@@ -242,8 +246,11 @@ const initWebsocket = () => {
 
   websocket.on(PICTURE_EDIT_MESSAGE_TYPE_ENUM.EXIT_EDIT, (msg) => {
     console.log('收到退出编辑状态的消息：', msg)
+    console.log('当前编辑用户:', editingUser.value)
+    console.log('登录用户ID:', loginUser.id)
     message.info(msg.message)
     editingUser.value = undefined
+    console.log('退出编辑后，编辑用户已清空:', editingUser.value)
   })
 }
 
@@ -269,6 +276,7 @@ const enterEdit = () => {
   console.log('用户点击进入编辑，websocket状态:', websocket)
   console.log('当前编辑用户:', editingUser.value)
   console.log('是否可以进入编辑:', canEnterEdit.value)
+  console.log('登录用户ID:', loginUser.id)
   
   if (websocket) {
     console.log('发送进入编辑请求')
@@ -278,16 +286,24 @@ const enterEdit = () => {
     })
   } else {
     console.error('WebSocket连接不存在')
+    // 如果WebSocket未连接，尝试重新初始化
+    initWebsocket()
   }
 }
 
 // 退出编辑状态
 const exitEdit = () => {
+  console.log('用户点击退出编辑，当前编辑用户:', editingUser.value)
+  console.log('登录用户:', loginUser)
+  
   if (websocket) {
+    console.log('发送退出编辑请求')
     // 发送退出编辑状态的请求
     websocket.sendMessage({
       type: PICTURE_EDIT_MESSAGE_TYPE_ENUM.EXIT_EDIT,
     })
+  } else {
+    console.error('WebSocket连接不存在')
   }
 }
 

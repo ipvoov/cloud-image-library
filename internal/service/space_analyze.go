@@ -14,6 +14,8 @@ type (
 	ISpaceAnalyze interface {
 		// CategoryAnalyze 空间分类分析
 		CategoryAnalyze(ctx context.Context, req *v1.SpaceCategoryAnalyzeReq) (res *v1.SpaceCategoryAnalyzeRes, err error)
+		// CheckSpaceAuth 检查空间权限
+		CheckSpaceAuth(ctx context.Context, req *v1.SpaceCategoryAnalyzeReq) (err error)
 		// TagAnalyze 空间标签分析
 		TagAnalyze(ctx context.Context, req *v1.SpaceTagAnalyzeReq) (res *v1.SpaceTagAnalyzeRes, err error)
 		// SizeAnalyze 空间大小分析
